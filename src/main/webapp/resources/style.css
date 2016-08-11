@@ -1,0 +1,18 @@
+@CHARSET "UTF-8";
+
+body {
+	font-family: sans-serif;
+}
+
+div.errors {
+	background-color: #ffcccc;
+	border: 2px solid red;
+}
+
+label.error {
+	color: red;
+}
+
+input.error {
+	background-color: #ffcccc;
+}
