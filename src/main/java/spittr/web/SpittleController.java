@@ -37,7 +37,11 @@ public class SpittleController {
 	//value parameter for @PathVariable can be omitted: ...@Pathvariable long spittleId...
 	@RequestMapping(value="/{spittleId}", method=RequestMethod.GET)
 	public String spittle(@PathVariable("spittleId") long spittleId, Model model) {
-		model.addAttribute(spittleRepository.findOne(spittleId));
+		Spittle spittle = spittleRepository.findOne(spittleId);
+		if ( spittle == null ) {
+			throw new SpittleNotFoundException();
+		}
+		model.addAttribute(spittle);
 		return "spittle";
 	}
 	
