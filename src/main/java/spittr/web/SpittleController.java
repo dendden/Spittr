@@ -1,5 +1,6 @@
 package spittr.web;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,13 @@ public class SpittleController {
 		}
 		model.addAttribute(spittle);
 		return "spittle";
+	}
+	
+	@RequestMapping(method=RequestMethod.POST)
+	public String saveSpittle(SpittleForm form, Model model) {
+		spittleRepository.save(new Spittle(form.getMessage(), new Date(), 
+				form.getLatitude(), form.getLongitude()));
+		return "redirect:/spittles";
 	}
 	
 //	@RequestMapping(method=RequestMethod.GET)

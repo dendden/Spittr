@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import spittr.Spittle;
+import spittr.web.DuplicateSpittleException;
 
 @Component
 public class SpittleRepositoryDemo implements SpittleRepository {
@@ -26,6 +27,18 @@ public class SpittleRepositoryDemo implements SpittleRepository {
 
 	public Spittle findOne(long id) {
 		return spittles.get((int) id);
+	}
+
+	public Spittle save(Spittle spittle) {
+		String thisMessage = spittle.getMessage();
+		for ( Spittle s : spittles ) {
+			if ( s.getMessage() == thisMessage ) {
+				throw new DuplicateSpittleException();
+			}
+		}
+		spittles.add(spittle);
+		
+		return spittle;
 	}
 
 }
